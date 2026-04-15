@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resin Calculator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="app">
+
+    <header>
+      <div class="logo">
+        <span class="logo-bracket">[</span>
+        RESIN CALC
+        <span class="logo-bracket">]</span>
+      </div>
+      <div class="step-track">
+        <div class="step-pip" id="pip-0"></div>
+        <div class="step-pip" id="pip-1"></div>
+        <div class="step-pip" id="pip-2"></div>
+        <div class="step-pip" id="pip-3"></div>
+        <div class="step-pip" id="pip-4"></div>
+        <div class="step-pip" id="pip-5"></div>
+      </div>
+    </header>
+
+    <main>
+
+      <!-- Input screen -->
+      <div id="screen-input" class="screen active">
+        <div class="input-area">
+          <div class="input-label" id="input-label">Enter length</div>
+          <div class="input-unit" id="input-unit">mm</div>
+          <div class="input-display">
+            <span id="display-value">0</span>
+            <span class="cursor">_</span>
+          </div>
+        </div>
+
+        <div class="keypad">
+          <button class="key" data-val="7">7</button>
+          <button class="key" data-val="8">8</button>
+          <button class="key" data-val="9">9</button>
+          <button class="key" data-val="4">4</button>
+          <button class="key" data-val="5">5</button>
+          <button class="key" data-val="6">6</button>
+          <button class="key" data-val="1">1</button>
+          <button class="key" data-val="2">2</button>
+          <button class="key" data-val="3">3</button>
+          <button class="key key-clear" data-val="clear">CLR</button>
+          <button class="key key-zero" data-val="0">0</button>
+          <button class="key key-confirm" data-val="confirm">OK</button>
+        </div>
+
+        <div class="hint" id="input-hint">Tap OK to confirm and move to the next value</div>
+      </div>
+
+      <!-- Results screen -->
+      <div id="screen-results" class="screen">
+        <div class="results-header">Results</div>
+
+        <div class="results-grid">
+          <div class="result-card" id="card-vol">
+            <div class="result-card-label">Volume</div>
+            <div class="result-card-value" id="res-vol">—</div>
+            <div class="result-card-unit">cm³</div>
+          </div>
+          <div class="result-card" id="card-mass">
+            <div class="result-card-label">Total mass</div>
+            <div class="result-card-value" id="res-mass">—</div>
+            <div class="result-card-unit">g</div>
+          </div>
+          <div class="result-card accent" id="card-resin">
+            <div class="result-card-label">Resin</div>
+            <div class="result-card-value" id="res-resin">—</div>
+            <div class="result-card-unit">g</div>
+          </div>
+          <div class="result-card accent" id="card-hard">
+            <div class="result-card-label">Hardener</div>
+            <div class="result-card-value" id="res-hard">—</div>
+            <div class="result-card-unit">g</div>
+          </div>
+          <div class="result-card wide" id="card-powder">
+            <div class="result-card-label">Powder</div>
+            <div class="result-card-value" id="res-powder">—</div>
+            <div class="result-card-unit">g</div>
+          </div>
+        </div>
+
+        <div class="results-ratio" id="results-ratio"></div>
+
+        <button class="btn-reset" id="btn-reset">New calculation</button>
+      </div>
+
+    </main>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
