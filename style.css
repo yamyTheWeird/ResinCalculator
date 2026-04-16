@@ -158,6 +158,44 @@ main { flex: 1; display: flex; flex-direction: column; }
   gap: 10px;
 }
 
+/* Bottom row (CLR · 0 OK) spans full width as 4-col subgrid */
+.key-clear, .key-dot, .key-zero, .key-confirm {
+  /* handled by explicit placement below */
+}
+
+/* Make last 4 buttons sit in a 4-col row */
+.keypad {
+  grid-template-rows: auto auto auto auto;
+}
+
+.key:nth-child(10) { grid-column: 1; grid-row: 4; }
+.key:nth-child(11) { grid-column: 2; grid-row: 4; }
+.key:nth-child(12) { grid-column: 3; grid-row: 4; }
+.key:nth-child(13) { grid-column: 4; grid-row: 4; }
+
+/* Override to 4-col only for the last row by making grid 4-col */
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr) 1fr;
+  gap: 10px;
+}
+
+/* Digits 7–9 span normal 3-col area */
+.key:nth-child(1)  { grid-column: 1; grid-row: 1; }
+.key:nth-child(2)  { grid-column: 2; grid-row: 1; }
+.key:nth-child(3)  { grid-column: 3; grid-row: 1; }
+.key:nth-child(4)  { grid-column: 1; grid-row: 2; }
+.key:nth-child(5)  { grid-column: 2; grid-row: 2; }
+.key:nth-child(6)  { grid-column: 3; grid-row: 2; }
+.key:nth-child(7)  { grid-column: 1; grid-row: 3; }
+.key:nth-child(8)  { grid-column: 2; grid-row: 3; }
+.key:nth-child(9)  { grid-column: 3; grid-row: 3; }
+/* Bottom row: CLR . 0 OK */
+.key:nth-child(10) { grid-column: 1; grid-row: 4; }
+.key:nth-child(11) { grid-column: 2; grid-row: 4; }
+.key:nth-child(12) { grid-column: 3; grid-row: 4; }
+.key:nth-child(13) { grid-column: 4; grid-row: 4; }
+
 .key {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -184,6 +222,14 @@ main { flex: 1; display: flex; flex-direction: column; }
 }
 
 .key-clear:hover { border-color: #c04040; color: #e06060; }
+
+.key-dot {
+  font-size: 1.8rem;
+  color: var(--text-dim);
+  line-height: 1;
+}
+
+.key-dot:hover { color: var(--text); border-color: var(--border2); }
 
 .key-confirm {
   background: var(--amber);
@@ -301,6 +347,18 @@ main { flex: 1; display: flex; flex-direction: column; }
 .btn-reset:hover {
   border-color: var(--amber-dim);
   color: var(--amber);
+}
+
+/* ── Footer credit ───────────────────────────────────────────────── */
+.credit {
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  color: var(--text-faint);
+  padding: 1.5rem 1.5rem 0;
+  border-top: 1px solid var(--border);
+  margin-top: 1rem;
 }
 
 /* ── Responsive ──────────────────────────────────────────────── */
