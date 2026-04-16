@@ -33,6 +33,7 @@ document.getElementById('btn-reset').addEventListener('click', reset);
 document.addEventListener('keydown', e => {
   if (screenResults.classList.contains('active')) return;
   if (e.key >= '0' && e.key <= '9') handleKey(e.key);
+  if (e.key === '.')        handleKey('.');
   if (e.key === 'Backspace') handleKey('clear');
   if (e.key === 'Enter')    handleKey('confirm');
 });
@@ -44,10 +45,15 @@ function handleKey(val) {
   } else if (val === 'confirm') {
     confirmStep();
     return;
+  } else if (val === '.') {
+    // Only one decimal point allowed
+    if (!currentInput.includes('.')) {
+      currentInput = currentInput === '' ? '0.' : currentInput + '.';
+    }
   } else {
-    // Prevent leading zeros and limit to 6 digits
+    // Prevent leading zeros unless followed by decimal, limit to 8 chars
     if (currentInput === '0') currentInput = val;
-    else if (currentInput.length < 6) currentInput += val;
+    else if (currentInput.length < 8) currentInput += val;
   }
   updateDisplay();
 }
@@ -58,8 +64,8 @@ function updateDisplay() {
 
 // ── Step navigation ───────────────────────────────────────────────
 function confirmStep() {
-  const num = parseInt(currentInput, 10);
-  if (!currentInput || isNaN(num) || num <= 0) {
+  const num = parseFloat(currentInput);
+  if (!currentInput || currentInput === '0.' || isNaN(num) || num <= 0) {
     flashError();
     return;
   }
@@ -94,11 +100,11 @@ function flashError() {
 function showResults() {
   const { length, width, height, res, hard, powder } = values;
 
-  const vol          = (length * width * height) / 1000;          // cm³
-  const mass         = vol * 1.15;                                 // g
-  const neededHard   = (hard * mass) / (res+hard);                       // g
-  const resinOnly    = mass - neededHard;                          // g
-  const neededPowder = (powder / 100) * mass;                     // g
+  const vol          = (length * width * height) / 1000;
+  const mass         = vol * 1.15;
+  const neededHard   = (hard * mass) / (res + hard);              // corrected formula
+  const resinOnly    = mass - neededHard;
+  const neededPowder = (powder / 100) * mass;
 
   // Populate result cards
   document.getElementById('res-vol').textContent    = vol.toFixed(2);
